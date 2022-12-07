@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Nginx/Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - fpm
+    volumes:
+      - ./src:/var/www/
+  fpm:
+    build:
+      context: .
+      dockerfile: docker/fpm/Dockerfile
+    volumes:
+      - ./src:/var/www/
