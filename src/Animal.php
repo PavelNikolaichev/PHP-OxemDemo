@@ -1,17 +1,14 @@
 <?php
 
-abstract class Animal
+class Animal
 {
-    private int $id;
-    private int $productionRangeMin, $productionRangeMax;
-
     /**
      * A constructor for Animal-class.
      * @param int $id - Animal id.
      * @param int $productionRangeMin - Minimum amount of goods that can be gathered from the animal.
      * @param int $productionRangeMax - Maximum amount of goods that can be gathered from the animal.
      */
-    abstract public function __construct(int $id, int $productionRangeMin, int $productionRangeMax);
+    public function __construct(private int $id, private int $productionRangeMin, private int $productionRangeMax) {}
 
 
     /**

@@ -24,7 +24,11 @@ class Farm
      */
     public function addAnimal(Animal $animal) : void
     {
-        if (!array_search($animal->getId(), array_column($this->animals, 'id'), true)) {
+        $converted_array =  array_map(function ($e) {
+            return $e->getId();
+        }, $this->animals);
+
+        if (!array_search($animal->getId(), $converted_array, true)) {
             $this->animals[] = $animal;
         }
     }
@@ -52,6 +56,22 @@ class Farm
     public function getAnimals() : array
     {
         return $this->animals;
+    }
+
+    /**
+     * Method to get count of each animal type on the farm.
+     * @return array - Array of animal types and their count.
+     */
+    public function countAnimalTypes() : array
+    {
+        $types = [];
+
+        foreach ($this->animals as $animal) {
+            $types[get_class($animal)] = $types[get_class($animal)] ?? 0;
+            $types[get_class($animal)]++;
+        }
+
+        return $types;
     }
 
     /**
